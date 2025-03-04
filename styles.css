@@ -1,0 +1,181 @@
+/* AI Prompt : How can I write CSS to center the body element and use a mario style font? */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Press Start 2P', cursive;
+    overflow: hidden;
+}
+
+/* AI Prompt : CSS code required to make a video background in HTML. */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Login Box */
+.login-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+/* Title Color */
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #ff0000;
+}
+
+/* Form entries */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 95%;
+    padding: 10px;
+    border: 2px solid #ffcc00;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+
+.login-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #ffcc00;
+    color: #000;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.login-button:hover {
+    background: #ff0000;
+    color: white;
+}
+
+/* Play Login Button */
+#play-login {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    font-size: 14px;
+    background: #ffcc00;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+}
+
+#play-login:hover {
+    background: #ff0000;
+    color: white;
+}
+
+/* Play Mario Button */
+#play-mario {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    font-size: 14px;
+    background: #ffcc00;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+}
+
+#play-mario:hover {
+    background: #ff0000;
+    color: white;
+}
+
+/* AI Prompt : Edit icons around login title */
+.header-with-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Mushroom and Coin icons */
+.icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer; /* AI Prompt : Add clickability to icons */
+}
+/*AI Prompt : How do I set it to have mushroom icon on the left and coin icon on the right? */
+/* Mushroom on the left */
+.left-icon {
+    transform: scaleX(-1);
+}
+
+/* Coin on the right */
+.right-icon {
+    transform: scaleX(1);
+}
+
+/* AI Prompt : I want to create a popup box close to full screen when a video opens. */
+#mario-video-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    display: none; /* Başlangıçta gizli olmalı */
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 300px;
+    z-index: 20;
+}
+
+
+#mario-video-container.active {
+    display: flex;
+}
+
+
+#mario-video {
+    width: 100%;
+    height: auto;
+}
+
+/* Video Close Button */
+#close-mario-video {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;
+    color: white;
+    border: none;
+    font-size: 16px;
+    padding: 5px;
+    cursor: pointer;
+}
