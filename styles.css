@@ -7,6 +7,88 @@ body {
     font-family: 'Press Start 2P', cursive;
     overflow: hidden;
 }
+#clock {
+    font-size: 24px;
+    color: #ffcc00;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.mario-block {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background: #ffcc00;
+    border: 5px solid #cc9900;
+    box-shadow: inset 0px 5px 0px #996600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #cc6600;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer; 
+}
+.mario-block-right {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: #ffcc00;
+    border: 5px solid #cc9900;
+    box-shadow: inset 0px 5px 0px #996600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #cc6600;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer; 
+}
+
+
+.mario-block::before {
+    content: "?";
+}
+.mario-block-right::before {
+    content: "?";
+}
+
+
+.coin {
+    position: fixed;
+    bottom: 40px; 
+    left: 40px;
+    width: 30px;
+    height: 30px;
+    background: gold;
+    border-radius: 50%;
+    border: 3px solid orange;
+    display: none; 
+    box-shadow: 0px 0px 10px yellow;
+}
+
+/* Throwing Animation */
+@keyframes coinJump {
+    0% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(-50px); opacity: 1; }
+    100% { transform: translateY(-70px); opacity: 0; }
+}
+
+.coin.jump {
+    display: block;
+    animation: coinJump 0.5s ease-out;
+}
 
 /* AI Prompt : CSS code required to make a video background in HTML. */
 #bg-video {
@@ -148,7 +230,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    display: none; /* Başlangıçta gizli olmalı */
+    display: none; 
     justify-content: center;
     align-items: center;
     width: 500px;

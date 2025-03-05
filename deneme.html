@@ -13,6 +13,8 @@
         <source src="video.mp4" type="video/mp4">
         Your browser does not support HTML5 video.
     </video>
+    <!-- AI Prompt : How to add an additional div for Clock in html -->
+    <div id="clock">00:00:00</div>
 
     <!-- AI Prompt : Make a simple play button and let it go to an address. -->
     <button id="play-mario" onclick="window.open('https://supermario-game.com/', '_blank')">Play Mario</button>
@@ -24,7 +26,9 @@
             <h2>LOGIN</h2>
             <img src="coin.png" class="icon right-icon" alt="Mario Coin" id="coin-icon">
         </div>
-        <form>
+        
+        <!-- Form ID Ekledik -->
+        <form id="login-form">
             <div class="input-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
@@ -36,6 +40,10 @@
             <button type="submit" class="login-button">Login</button>
         </form>
     </div>
+    <!-- Mario Bloğu -->
+    <div class="mario-block"></div>
+    <div class = "mario-block-right"></div>
+
 
     <!-- Mario Video -->
     <div id="mario-video-container" class="hidden">
@@ -43,7 +51,7 @@
          <source src="mariovideo.mp4" type="video/mp4">
          Your browser does not support HTML5 video.
       </video>
-    <button id="close-mario-video">X</button> <!-- Kapatma butonu -->
+    <button id="close-mario-video">X</button> <!-- close button -->
     </div>
 
     <!-- Play Login Button -->
