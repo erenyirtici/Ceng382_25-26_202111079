@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Table</title>
+    <link rel="stylesheet" href="table.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <video id="bg-video" autoplay loop muted>
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+    
+    <h1>CLASS INFORMATION</h1>
+    <!-- AI Prompt: "How can I create a form in HTML with required input fields?" -->
+    <!-- Form -->
+    <form id="class-form">
+        <label for="class-name">Class Name:</label>
+        <input type="text" id="class-name" required>
+
+        <label for="number-people">Number of People:</label>
+        <input type="number" id="number-people" required>
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" required>
+
+        <button type="submit">Add Class</button>
+    </form>
+
+    <!-- Table -->
+    <table id="class-table">
+        <thead>
+            <tr>
+                <th>Class Name</th>
+                <th>Number of People</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- New data will be added here dynamically -->
+        </tbody>
+    </table>
+
+    <script src="table.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,166 @@
+/* Mario GIF Background */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: 'Press Start 2P', cursive;
+    background-size: cover;
+    color: #333;
+    overflow: hidden;
+}
+/* Video Background */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+
+
+/* Header */
+h1 {
+    color: #ff0000; /* Kırmızı başlık */
+    text-shadow: 2px 2px 0px #fff, 4px 4px 0px #000;
+    margin-bottom: 20px;
+}
+
+/* AI Prompt: "How can I style an HTML form with a semi-transparent background?" */
+form {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 350px;
+    margin-bottom: 20px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* AI Prompt: "How do I add consistent styling to form labels?" */
+form label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+form input {
+    width: 90%;
+    padding: 10px;
+    border: 2px solid #ffcc00;
+    border-radius: 5px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Form Button */
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #ffcc00;
+    color: black;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #ff0000;
+    color: white;
+}
+
+/* Table Design */
+table {
+    width: 80%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Tablo Header */
+thead {
+    background: #ffcc00;
+    color: black;
+}
+
+th, td {
+    padding: 10px;
+    border: 2px solid #ffcc00;
+    text-align: center;
+}
+
+/* AI Prompt: "How do I alternate row colors for better readability in tables?" */
+tbody tr:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(230, 230, 230, 0.8);
+}
+
+
+tbody tr:hover {
+    background: #ffeb3b;
+    transition: 0.3s ease-in-out;
+}
+
+
+tbody tr.added {
+    background: #00ff00;
+}
+
+/* Mario Blocks */
+.mario-block, .mario-block-right {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    background: #ffcc00;
+    border: 5px solid #cc9900;
+    box-shadow: inset 0px 5px 0px #996600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #cc6600;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+}
+
+.mario-block {
+    bottom: 20px;
+    left: 20px;
+}
+
+.mario-block-right {
+    bottom: 20px;
+    right: 20px;
+}
+
+.mario-block::before, .mario-block-right::before {
+    content: "?";
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        font-size: 12px;
+    }
+    
+    form {
+        width: 90%;
+    }
+
+    table {
+        width: 100%;
+    }
+}

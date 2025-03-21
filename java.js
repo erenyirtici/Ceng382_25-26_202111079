@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
     updateClock(); 
     
     //AI Prompt : Create a login form. Save username and password in an array. Print the entire user list to the console after the user logs in.
-    loginForm.addEventListener("submit", function(event) {
+    /*loginForm.addEventListener("submit", function(event) {
         event.preventDefault(); //Prevent page from refreshing
 
         let username = document.getElementById("username").value; 
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         console.log("All users:", userList); 
         loginForm.reset();
-    });
+    });*/
     //AI Prompt : "Control the click event with JavaScript for multiple Mario blocks and generate a coin on each click."
     marioBlocks.forEach(marioBlock => {
         marioBlock.addEventListener("click", function () {
@@ -120,6 +120,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 coin.remove();
             }, 500);
         });
+    });
+    loginForm.addEventListener("submit", function (event) {
+        event.preventDefault(); // Sayfanın yenilenmesini engelle
+
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+
+        if (username === "admin" && password === "admin") {
+           window.location.href = "table.html"; // Başarılı girişte yönlendir
+            
+        } else {
+            alert("Hatalı giriş! Lütfen 'admin' kullanıcı adı ve şifreyi girin.");
+        }
     });
 
 });
