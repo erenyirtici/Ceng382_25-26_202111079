@@ -12,13 +12,36 @@ namespace Week5Lab.Pages
         [BindProperty(SupportsGet = true)]
         public int? EditId { get; set; }
 
-        public List<ClassInformationModel> ClassList { get; set; } = new();
+        [BindProperty(SupportsGet = true)]
+        public string? ClassNameFilter { get; set; }
 
-        private static List<ClassInformationModel> _storage = new();
+        [BindProperty(SupportsGet = true)]
+        public int PageNumber { get; set; } = 1; 
+
+        public const int PageSize = 10;
+
+        public List<ClassInformationTable> DisplayedClasses { get; set; } = new();
+        public int TotalPages { get; set; }
+
+        private static List<ClassInformationModel>? _storage;
 
         public void OnGet()
         {
-            ClassList = _storage;
+            
+            if (_storage == null || !_storage.Any())
+            {
+                _storage = new List<ClassInformationModel>();
+                for (int i = 1; i <= 100; i++)
+                {
+                    _storage.Add(new ClassInformationModel
+                    {
+                        Id = i,
+                        ClassName = $"Class {i % 5}",
+                        StudentCount = 10 + i,
+                        Description = $"This is class {i}"
+                    });
+                }
+            }
 
             if (EditId.HasValue)
             {
@@ -34,22 +57,39 @@ namespace Week5Lab.Pages
                     };
                 }
             }
-            else
+
+            var query = _storage.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(ClassNameFilter))
             {
-                NewClass = new ClassInformationModel();
+                query = query.Where(x => x.ClassName.Contains(ClassNameFilter, StringComparison.OrdinalIgnoreCase));
             }
+
+            int totalItems = query.Count();
+            TotalPages = (int)Math.Ceiling(totalItems / (double)PageSize);
+
+            PageNumber = Math.Clamp(PageNumber, 1, Math.Max(1, TotalPages));
+
+            DisplayedClasses = query
+                .Skip((PageNumber - 1) * PageSize)
+                .Take(PageSize)
+                .Select(x => new ClassInformationTable
+                {
+                    Id = x.Id,
+                    ClassName = x.ClassName,
+                    StudentCount = x.StudentCount,
+                    Description = x.Description
+                })
+                .ToList();
         }
 
         public IActionResult OnPost()
         {
-            ClassList = _storage;
-
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || _storage == null)
                 return Page();
 
             if (EditId.HasValue)
             {
-                // Düzenleme
                 var existing = _storage.FirstOrDefault(x => x.Id == EditId.Value);
                 if (existing != null)
                 {
@@ -60,7 +100,6 @@ namespace Week5Lab.Pages
             }
             else
             {
-                // Yeni Ekleme → En küçük boş ID'yi bul
                 int newId = 1;
                 while (_storage.Any(x => x.Id == newId))
                     newId++;
@@ -69,16 +108,18 @@ namespace Week5Lab.Pages
                 _storage.Add(NewClass);
             }
 
-            return RedirectToPage();
+            return RedirectToPage(new { PageNumber, ClassNameFilter });
         }
 
         public IActionResult OnPostDelete(int id)
         {
+            if (_storage == null) return RedirectToPage();
+
             var item = _storage.FirstOrDefault(c => c.Id == id);
             if (item != null)
                 _storage.Remove(item);
 
-            return RedirectToPage();
+            return RedirectToPage(new { PageNumber, ClassNameFilter });
         }
     }
 }
