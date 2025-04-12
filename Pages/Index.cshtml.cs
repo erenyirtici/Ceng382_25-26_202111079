@@ -16,7 +16,7 @@ namespace Week5Lab.Pages
         public string? ClassNameFilter { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public int PageNumber { get; set; } = 1; 
+        public int PageNumber { get; set; } = 1;
 
         public const int PageSize = 10;
 
@@ -27,20 +27,9 @@ namespace Week5Lab.Pages
 
         public void OnGet()
         {
-            
             if (_storage == null || !_storage.Any())
             {
-                _storage = new List<ClassInformationModel>();
-                for (int i = 1; i <= 100; i++)
-                {
-                    _storage.Add(new ClassInformationModel
-                    {
-                        Id = i,
-                        ClassName = $"Class {i % 5}",
-                        StudentCount = 10 + i,
-                        Description = $"This is class {i}"
-                    });
-                }
+                _storage = GenerateFakeData(); // ✅ Sadece bu çağrı yeterli
             }
 
             if (EditId.HasValue)
@@ -67,7 +56,6 @@ namespace Week5Lab.Pages
 
             int totalItems = query.Count();
             TotalPages = (int)Math.Ceiling(totalItems / (double)PageSize);
-
             PageNumber = Math.Clamp(PageNumber, 1, Math.Max(1, TotalPages));
 
             DisplayedClasses = query
@@ -120,6 +108,33 @@ namespace Week5Lab.Pages
                 _storage.Remove(item);
 
             return RedirectToPage(new { PageNumber, ClassNameFilter });
+        }
+
+        private static List<ClassInformationModel> GenerateFakeData()
+        {
+            string[] baseNames = { "Math", "Science", "English", "History", "Physics", "Biology", "Art", "Music", "PE", "Chemistry" };
+            string[] suffixes = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" }; 
+
+
+            var list = new List<ClassInformationModel>();
+            int idCounter = 1;
+
+            foreach (var name in baseNames)
+            {
+                foreach (var suffix in suffixes)
+                {
+                    list.Add(new ClassInformationModel
+                    {
+                        Id = idCounter,
+                        ClassName = $"{name} {suffix}",
+                        StudentCount = 15 + (idCounter % 25),
+                        Description = $"This is {name} section {suffix}"
+                    });
+                    idCounter++;
+                }
+            }
+
+            return list;
         }
     }
 }
