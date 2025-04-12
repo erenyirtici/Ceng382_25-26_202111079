@@ -29,7 +29,7 @@ namespace Week5Lab.Pages
         {
             if (_storage == null || !_storage.Any())
             {
-                _storage = GenerateFakeData(); // ✅ Sadece bu çağrı yeterli
+                _storage = GenerateFakeData(); 
             }
 
             if (EditId.HasValue)
