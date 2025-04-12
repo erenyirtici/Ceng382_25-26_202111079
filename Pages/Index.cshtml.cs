@@ -136,5 +136,23 @@ namespace Week5Lab.Pages
 
             return list;
         }
+        public IActionResult OnPostExport(List<string>? selectedColumns, bool filtered = false)
+            {
+                if (_storage == null) return BadRequest("No data to export.");
+
+                var data = _storage.AsQueryable();
+
+                if (filtered && !string.IsNullOrWhiteSpace(ClassNameFilter))
+                {
+                    data = data.Where(x => x.ClassName.Contains(ClassNameFilter, StringComparison.OrdinalIgnoreCase));
+                }
+
+                var json = Helpers.Utils.Instance.ExportToJson(data.ToList(), selectedColumns);
+
+                var fileName = $"classes_{(filtered ? "filtered" : "all")}_{DateTime.Now:yyyyMMddHHmmss}.json";
+                return File(System.Text.Encoding.UTF8.GetBytes(json), "application/json", fileName);
+            }
+
+
     }
 }
