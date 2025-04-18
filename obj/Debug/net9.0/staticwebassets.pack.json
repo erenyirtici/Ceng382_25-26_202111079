@@ -9,8 +9,16 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\Eren\\Desktop\\week5\\wwwroot\\data\\users.json",
+      "PackagePath": "staticwebassets\\data\\users.json"
+    },
+    {
       "Id": "C:\\Users\\Eren\\Desktop\\week5\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Eren\\Desktop\\week5\\wwwroot\\images\\cankaya.jpg",
+      "PackagePath": "staticwebassets\\images\\cankaya.jpg"
     },
     {
       "Id": "C:\\Users\\Eren\\Desktop\\week5\\wwwroot\\js\\site.js",
@@ -255,10 +263,6 @@
     {
       "Id": "C:\\Users\\Eren\\Desktop\\week5\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.map"
-    },
-    {
-      "Id": "C:\\Users\\Eren\\Desktop\\week5\\wwwroot\\users.json",
-      "PackagePath": "staticwebassets\\users.json"
     },
     {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.Week5Lab.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

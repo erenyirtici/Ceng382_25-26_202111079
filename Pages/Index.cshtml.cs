@@ -27,6 +27,24 @@ namespace Week5Lab.Pages
 
         public void OnGet()
         {
+            
+    
+            var sessionToken = HttpContext.Session.GetString("token");
+            var cookieToken = Request.Cookies["token"];
+            var sessionUser = HttpContext.Session.GetString("username");
+            var cookieUser = Request.Cookies["username"];
+
+                    if (string.IsNullOrEmpty(sessionToken) || 
+                string.IsNullOrEmpty(cookieToken) || 
+                sessionToken != cookieToken || 
+                sessionUser != cookieUser)
+            {
+                TempData["Error"] = "You must be logged in.";
+                Response.Redirect("/Login");
+                return;
+            }
+
+
             if (_storage == null || !_storage.Any())
             {
                 _storage = GenerateFakeData(); 
@@ -184,7 +202,15 @@ namespace Week5Lab.Pages
 
             return File(System.Text.Encoding.UTF8.GetBytes(json), "application/json", filename);
         }
+        public IActionResult OnPostLogout()
+            {
+                HttpContext.Session.Clear();
+                Response.Cookies.Delete("token");
+                Response.Cookies.Delete("username");
+                Response.Cookies.Delete("session_id");
 
+                return RedirectToPage("/Login");
+            }
 
 
 
