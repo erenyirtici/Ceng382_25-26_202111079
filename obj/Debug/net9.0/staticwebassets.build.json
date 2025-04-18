@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "o7AQj6U3yj3DtC5ONJUcqFU5KWgUBaL2oJPPBwvDIRQ=",
+  "Hash": "trsU0K6IOUooDorAPviOomqlFMZyjIn8YROqTnj9U9M=",
   "Source": "Week5Lab",
   "BasePath": "_content/Week5Lab",
   "Mode": "Default",
@@ -246,6 +246,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Eren\\Desktop\\week5\\wwwroot\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\Eren\\Desktop\\week5\\obj\\Debug\\net9.0\\compressed\\7nw9wz3f3i-r12n71u6zv.gz",
+      "SourceId": "Week5Lab",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Eren\\Desktop\\week5\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Week5Lab",
+      "RelativePath": "users#[.{fingerprint=r12n71u6zv}]?.json.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\Eren\\Desktop\\week5\\wwwroot\\users.json",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "c54opg37uc",
+      "Integrity": "AOxUtGW+mUzKXSZz1rqzjmoGcvTiO1sjxjT8kaHeeY4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\Eren\\Desktop\\week5\\wwwroot\\users.json"
     },
     {
       "Identity": "C:\\Users\\Eren\\Desktop\\week5\\obj\\Debug\\net9.0\\compressed\\84p4pvtqsr-c2oey78nd0.gz",
@@ -2724,6 +2745,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\Eren\\Desktop\\week5\\wwwroot\\users.json",
+      "SourceId": "Week5Lab",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Eren\\Desktop\\week5\\wwwroot\\",
+      "BasePath": "_content/Week5Lab",
+      "RelativePath": "users#[.{fingerprint}]?.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "r12n71u6zv",
+      "Integrity": "H9Vm0HWiOb8IFvFBaD4OaZcYVpCtVVs3OiabEcWxmos=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\users.json"
     }
   ],
   "Endpoints": [
@@ -21282,6 +21324,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-JKWeHUaANNuffeRatdc54UCb84RoxjEw/nTq8Mops8Y="
+        }
+      ]
+    },
+    {
+      "Route": "users.json",
+      "AssetFile": "C:\\Users\\Eren\\Desktop\\week5\\obj\\Debug\\net9.0\\compressed\\7nw9wz3f3i-r12n71u6zv.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.006711409396"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "148"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AOxUtGW+mUzKXSZz1rqzjmoGcvTiO1sjxjT8kaHeeY4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 09:56:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"H9Vm0HWiOb8IFvFBaD4OaZcYVpCtVVs3OiabEcWxmos=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-H9Vm0HWiOb8IFvFBaD4OaZcYVpCtVVs3OiabEcWxmos="
+        }
+      ]
+    },
+    {
+      "Route": "users.json",
+      "AssetFile": "C:\\Users\\Eren\\Desktop\\week5\\wwwroot\\users.json",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "304"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"H9Vm0HWiOb8IFvFBaD4OaZcYVpCtVVs3OiabEcWxmos=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 09:56:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-H9Vm0HWiOb8IFvFBaD4OaZcYVpCtVVs3OiabEcWxmos="
+        }
+      ]
+    },
+    {
+      "Route": "users.json.gz",
+      "AssetFile": "C:\\Users\\Eren\\Desktop\\week5\\obj\\Debug\\net9.0\\compressed\\7nw9wz3f3i-r12n71u6zv.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "148"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AOxUtGW+mUzKXSZz1rqzjmoGcvTiO1sjxjT8kaHeeY4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 09:56:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-AOxUtGW+mUzKXSZz1rqzjmoGcvTiO1sjxjT8kaHeeY4="
+        }
+      ]
+    },
+    {
+      "Route": "users.r12n71u6zv.json",
+      "AssetFile": "C:\\Users\\Eren\\Desktop\\week5\\obj\\Debug\\net9.0\\compressed\\7nw9wz3f3i-r12n71u6zv.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.006711409396"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "148"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AOxUtGW+mUzKXSZz1rqzjmoGcvTiO1sjxjT8kaHeeY4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 09:56:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"H9Vm0HWiOb8IFvFBaD4OaZcYVpCtVVs3OiabEcWxmos=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "r12n71u6zv"
+        },
+        {
+          "Name": "label",
+          "Value": "users.json"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-H9Vm0HWiOb8IFvFBaD4OaZcYVpCtVVs3OiabEcWxmos="
+        }
+      ]
+    },
+    {
+      "Route": "users.r12n71u6zv.json",
+      "AssetFile": "C:\\Users\\Eren\\Desktop\\week5\\wwwroot\\users.json",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "304"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"H9Vm0HWiOb8IFvFBaD4OaZcYVpCtVVs3OiabEcWxmos=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 09:56:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "r12n71u6zv"
+        },
+        {
+          "Name": "label",
+          "Value": "users.json"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-H9Vm0HWiOb8IFvFBaD4OaZcYVpCtVVs3OiabEcWxmos="
+        }
+      ]
+    },
+    {
+      "Route": "users.r12n71u6zv.json.gz",
+      "AssetFile": "C:\\Users\\Eren\\Desktop\\week5\\obj\\Debug\\net9.0\\compressed\\7nw9wz3f3i-r12n71u6zv.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "148"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AOxUtGW+mUzKXSZz1rqzjmoGcvTiO1sjxjT8kaHeeY4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 09:56:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "r12n71u6zv"
+        },
+        {
+          "Name": "label",
+          "Value": "users.json.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-AOxUtGW+mUzKXSZz1rqzjmoGcvTiO1sjxjT8kaHeeY4="
         }
       ]
     },

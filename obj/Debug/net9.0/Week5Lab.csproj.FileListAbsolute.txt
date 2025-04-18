@@ -96,3 +96,4 @@ C:\Users\Eren\Desktop\week5\obj\Debug\net9.0\staticwebassets\msbuild.buildTransi
 C:\Users\Eren\Desktop\week5\obj\Debug\net9.0\staticwebassets.pack.json
 C:\Users\Eren\Desktop\week5\obj\Debug\net9.0\Week5Lab.genruntimeconfig.cache
 C:\Users\Eren\Desktop\week5\obj\Debug\net9.0\ref\Week5Lab.dll
+C:\Users\Eren\Desktop\week5\obj\Debug\net9.0\compressed\7nw9wz3f3i-r12n71u6zv.gz

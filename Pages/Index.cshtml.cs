@@ -136,22 +136,58 @@ namespace Week5Lab.Pages
 
             return list;
         }
-        public IActionResult OnPostExport(List<string>? selectedColumns, bool filtered = false)
+        public IActionResult OnPostExport(string? selectedColumns, string? FilteredExport)
+        {
+            if (_storage == null) return BadRequest("No data to export.");
+
+            List<string>? selectedList = null;
+
+            // 👉 Kolonları parse et
+            if (!string.IsNullOrWhiteSpace(selectedColumns))
             {
-                if (_storage == null) return BadRequest("No data to export.");
+                selectedList = selectedColumns
+                    .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => s.Trim())
+                    .ToList();
 
-                var data = _storage.AsQueryable();
-
-                if (filtered && !string.IsNullOrWhiteSpace(ClassNameFilter))
+                // Eğer gerçekten hiçbir kolon seçilmemişse null olarak ayarla
+                if (selectedList.Count == 0)
                 {
-                    data = data.Where(x => x.ClassName.Contains(ClassNameFilter, StringComparison.OrdinalIgnoreCase));
+                    selectedList = null;
+                }
+            }
+
+            // 🔍 Eğer kolon seçilmemişse → Tüm veriyi dışa aktar
+            var query = _storage.AsQueryable();
+            if (selectedList != null)
+            {
+                // Kolonlar seçiliyse filtrele/sayfala
+                if (!string.IsNullOrWhiteSpace(ClassNameFilter))
+                {
+                    query = query.Where(x => x.ClassName.Contains(ClassNameFilter, StringComparison.OrdinalIgnoreCase));
                 }
 
-                var json = Helpers.Utils.Instance.ExportToJson(data.ToList(), selectedColumns);
-
-                var fileName = $"classes_{(filtered ? "filtered" : "all")}_{DateTime.Now:yyyyMMddHHmmss}.json";
-                return File(System.Text.Encoding.UTF8.GetBytes(json), "application/json", fileName);
+                if (FilteredExport != "true")
+                {
+                    query = query
+                        .Skip((PageNumber - 1) * PageSize)
+                        .Take(PageSize);
+                }
             }
+
+            var exportList = query.ToList();
+
+            var json = Helpers.Utils.Instance.ExportToJson(exportList, selectedList);
+
+            var timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
+            var filename = $"classes_{(selectedList == null ? "all" : FilteredExport == "true" ? "filtered" : "page")}_{timestamp}.json";
+
+            return File(System.Text.Encoding.UTF8.GetBytes(json), "application/json", filename);
+        }
+
+
+
+
 
 
     }

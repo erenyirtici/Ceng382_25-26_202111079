@@ -57,36 +57,24 @@
                     <form method="post" asp-page-handler="Export" class="mb-3" id="exportForm">
                         <input type="hidden" name="PageNumber" value="@Model.PageNumber" />
                         <input type="hidden" name="ClassNameFilter" value="@Model.ClassNameFilter" />
-                        <div class="d-flex gap-3 flex-wrap mb-2">
-                            <div class="form-check">
-                                <input type="checkbox" name="selectedColumns" value="ClassName" class="d-none" id="colClassName" />
-                                <label for="colClassName" class="column-label">Class Name</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" name="selectedColumns" value="StudentCount" class="d-none" id="colStudentCount" />
-                                <label for="colStudentCount" class="column-label">Student Count</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" name="selectedColumns" value="Description" class="d-none" id="colDescription" />
-                                <label for="colDescription" class="column-label">Description</label>
-                            </div>
-                        </div>
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-outline-success" formaction="?handler=Export">Export All to JSON</button>
-                            <button type="submit" class="btn btn-outline-warning" formaction="?handler=Export&filtered=true">Export Filtered to JSON</button>
-                        </div>
+
+                        <input type="hidden" id="selectedColumnsInput" name="selectedColumns" />
+
+                        <button type="submit" class="btn btn-outline-success">Export to JSON</button>
                     </form>
+
 
                     
                     <table class="table table-striped table-bordered align-middle">
                         <thead class="table-light">
-                            <tr>
-                                <th data-column="ClassName">Class Name</th>
-                                <th data-column="StudentCount">Student Count</th>
-                                <th data-column="Description">Description</th>
-                                <th>Actions</th>
-                            </tr>
+                        <tr>
+                            <th data-column="ClassName" onclick="toggleColumnSelection('ClassName')">Class Name</th>
+                            <th data-column="StudentCount" onclick="toggleColumnSelection('StudentCount')">Student Count</th>
+                            <th data-column="Description" onclick="toggleColumnSelection('Description')">Description</th>
+                            <th>Actions</th>
+                        </tr>
                         </thead>
+
                         <tbody>
                             @foreach (var item in Model.DisplayedClasses)
                             {
@@ -144,6 +132,39 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+    let selectedCols = new Set();
+
+    function toggleColumnSelection(column) {
+        if (selectedCols.has(column)) {
+            selectedCols.delete(column);
+        } else {
+            selectedCols.add(column);
+        }
+
+        updateVisuals();
+        updateHiddenInput();
+    }
+
+    function updateVisuals() {
+        document.querySelectorAll('[data-column]').forEach(el => {
+            const col = el.getAttribute('data-column');
+            if (selectedCols.has(col)) {
+                el.classList.add('highlight-column');
+            } else {
+                el.classList.remove('highlight-column');
+            }
+        });
+    }
+
+    function updateHiddenInput() {
+        document.getElementById('selectedColumnsInput').value = Array.from(selectedCols).join(',');
+    }
+
+    // Eğer geri geldiğimizde önceki seçimler varsa
+    updateVisuals();
+    updateHiddenInput();
+    </script>
 
     <style>
         .highlight-column {
@@ -247,3 +268,18 @@
     }
 </style>
 
+<style>
+    th[data-column] {
+        cursor: pointer;
+        user-select: none;
+        transition: background-color 0.2s ease-in-out;
+    }
+
+    th[data-column]:hover {
+        background-color: #f0f8ff;
+    }
+
+    .highlight-column {
+        background-color: #fff3cd !important;
+    }
+</style>

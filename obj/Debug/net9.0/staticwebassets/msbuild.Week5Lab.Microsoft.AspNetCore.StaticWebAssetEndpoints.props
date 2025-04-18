@@ -756,6 +756,18 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1117"},{"Name":"Content-Type","Value":"text/plain"},{"Name":"ETag","Value":"\u0022hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk=\u0022"},{"Name":"Last-Modified","Value":"Sat, 05 Apr 2025 18:50:09 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Week5Lab/users.json">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\users.json'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-H9Vm0HWiOb8IFvFBaD4OaZcYVpCtVVs3OiabEcWxmos="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"304"},{"Name":"Content-Type","Value":"application/json"},{"Name":"ETag","Value":"\u0022H9Vm0HWiOb8IFvFBaD4OaZcYVpCtVVs3OiabEcWxmos=\u0022"},{"Name":"Last-Modified","Value":"Fri, 18 Apr 2025 09:56:23 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Week5Lab/users.r12n71u6zv.json">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\users.json'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"r12n71u6zv"},{"Name":"integrity","Value":"sha256-H9Vm0HWiOb8IFvFBaD4OaZcYVpCtVVs3OiabEcWxmos="},{"Name":"label","Value":"_content/Week5Lab/users.json"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"304"},{"Name":"Content-Type","Value":"application/json"},{"Name":"ETag","Value":"\u0022H9Vm0HWiOb8IFvFBaD4OaZcYVpCtVVs3OiabEcWxmos=\u0022"},{"Name":"Last-Modified","Value":"Fri, 18 Apr 2025 09:56:23 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Week5Lab/Week5Lab.9nbw72keuq.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Week5Lab.9nbw72keuq.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
