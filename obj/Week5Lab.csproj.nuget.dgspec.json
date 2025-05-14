@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Eren\\Desktop\\week5\\Week5Lab.csproj": {}
+    "C:\\Users\\Eren\\Desktop\\WEEEEEK\\Week5Lab.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Eren\\Desktop\\week5\\Week5Lab.csproj": {
+    "C:\\Users\\Eren\\Desktop\\WEEEEEK\\Week5Lab.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eren\\Desktop\\week5\\Week5Lab.csproj",
+        "projectUniqueName": "C:\\Users\\Eren\\Desktop\\WEEEEEK\\Week5Lab.csproj",
         "projectName": "Week5Lab",
-        "projectPath": "C:\\Users\\Eren\\Desktop\\week5\\Week5Lab.csproj",
+        "projectPath": "C:\\Users\\Eren\\Desktop\\WEEEEEK\\Week5Lab.csproj",
         "packagesPath": "C:\\Users\\Eren\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eren\\Desktop\\week5\\obj\\",
+        "outputPath": "C:\\Users\\Eren\\Desktop\\WEEEEEK\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Eren\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -43,6 +43,22 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -62,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,12 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
+using Week5Lab.Data;
 using Week5Lab.Models;
 
 namespace Week5Lab.Pages
 {
     public class LoginModel : PageModel
     {
+        private readonly SchoolDbContext _context;
+
+        public LoginModel(SchoolDbContext context)
+        {
+            _context = context;
+        }
+
         [BindProperty]
         public string Username { get; set; } = "";
 
@@ -15,35 +23,19 @@ namespace Week5Lab.Pages
 
         public string? ErrorMessage { get; set; }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
-            string jsonPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "data", "users.json");
-
-            if (!System.IO.File.Exists(jsonPath))
-            {
-                ErrorMessage = "User data not found.";
-                return Page();
-            }
-
-            var json = System.IO.File.ReadAllText(jsonPath);
-            var users = JsonSerializer.Deserialize<List<User>>(json);
-
-            var user = users?.FirstOrDefault(u => 
-                u.Username == Username && 
-                u.Password == Password && 
-                u.IsActive);
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Username == Username && u.Password == Password && u.IsActive);
 
             if (user != null)
             {
-                           
-                string token = Guid.NewGuid().ToString(); 
+                string token = Guid.NewGuid().ToString();
 
-                
                 HttpContext.Session.SetString("username", user.Username);
                 HttpContext.Session.SetString("token", token);
                 HttpContext.Session.SetString("session_id", HttpContext.Session.Id);
 
-                
                 CookieOptions cookieOptions = new()
                 {
                     Expires = DateTime.UtcNow.AddMinutes(30),

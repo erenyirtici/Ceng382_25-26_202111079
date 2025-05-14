@@ -1,13 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Week5Lab.Models;
+using Week5Lab.Data;
+using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Week5Lab.Pages
 {
     public class IndexModel : PageModel
     {
+        
+        
+    
+        //public ClassInformationModel NewClass { get; set; } = new();
         [BindProperty]
-        public ClassInformationModel NewClass { get; set; } = new();
+        public Class NewClass { get; set; } = new Class { ClassName = string.Empty };
+
+
 
         [BindProperty(SupportsGet = true)]
         public int? EditId { get; set; }
@@ -23,125 +33,122 @@ namespace Week5Lab.Pages
         public List<ClassInformationTable> DisplayedClasses { get; set; } = new();
         public int TotalPages { get; set; }
 
-        private static List<ClassInformationModel>? _storage;
+        //private static List<ClassInformationModel>? _storage;
 
-        public void OnGet()
+        private readonly SchoolDbContext _context;
+
+        public IndexModel(SchoolDbContext context)
         {
-            
-    
-            var sessionToken = HttpContext.Session.GetString("token");
-            var cookieToken = Request.Cookies["token"];
-            var sessionUser = HttpContext.Session.GetString("username");
-            var cookieUser = Request.Cookies["username"];
-
-                    if (string.IsNullOrEmpty(sessionToken) || 
-                string.IsNullOrEmpty(cookieToken) || 
-                sessionToken != cookieToken || 
-                sessionUser != cookieUser)
-            {
-                TempData["Error"] = "You must be logged in.";
-                Response.Redirect("/Login");
-                return;
-            }
-
-
-            if (_storage == null || !_storage.Any())
-            {
-                _storage = GenerateFakeData(); 
-            }
-
-            if (EditId.HasValue)
-            {
-                var item = _storage.FirstOrDefault(c => c.Id == EditId.Value);
-                if (item != null)
-                {
-                    NewClass = new ClassInformationModel
-                    {
-                        Id = item.Id,
-                        ClassName = item.ClassName,
-                        StudentCount = item.StudentCount,
-                        Description = item.Description
-                    };
-                }
-            }
-
-            var query = _storage.AsQueryable();
-
-            if (!string.IsNullOrWhiteSpace(ClassNameFilter))
-            {
-                query = query.Where(x => x.ClassName.Contains(ClassNameFilter, StringComparison.OrdinalIgnoreCase));
-            }
-
-            int totalItems = query.Count();
-            TotalPages = (int)Math.Ceiling(totalItems / (double)PageSize);
-            PageNumber = Math.Clamp(PageNumber, 1, Math.Max(1, TotalPages));
-
-            DisplayedClasses = query
-                .Skip((PageNumber - 1) * PageSize)
-                .Take(PageSize)
-                .Select(x => new ClassInformationTable
-                {
-                    Id = x.Id,
-                    ClassName = x.ClassName,
-                    StudentCount = x.StudentCount,
-                    Description = x.Description
-                })
-                .ToList();
+            _context = context;
         }
 
-        public IActionResult OnPost()
+        public IList<Class> ClassList { get; set; } = new List<Class>();
+
+        public async Task OnGetAsync()
+                {
+                    EnsureSeeded();
+                    // ➤ Session kontrolü
+                    var sessionToken = HttpContext.Session.GetString("token");
+                    var cookieToken = Request.Cookies["token"];
+                    var sessionUser = HttpContext.Session.GetString("username");
+                    var cookieUser = Request.Cookies["username"];
+
+                    if (string.IsNullOrEmpty(sessionToken) ||
+                        string.IsNullOrEmpty(cookieToken) ||
+                        sessionToken != cookieToken ||
+                        sessionUser != cookieUser)
+                    {
+                        TempData["Error"] = "You must be logged in.";
+                        Response.Redirect("/Login");
+                        return;
+                    }
+
+                    // ➤ Veri çekme (isteğe bağlı filtreli çekebilirsin)
+                    var query = _context.Classes.AsQueryable();
+                    query = query.Where(x => x.IsActive); // sadece aktif olanlar
+
+
+                    if (!string.IsNullOrWhiteSpace(ClassNameFilter))
+                    {
+                        query = query.Where(x => x.ClassName.Contains(ClassNameFilter));
+                    }
+
+                    int totalItems = await query.CountAsync();
+                    TotalPages = (int)Math.Ceiling(totalItems / (double)PageSize);
+                    PageNumber = Math.Clamp(PageNumber, 1, Math.Max(1, TotalPages));
+
+                    ClassList = await query
+                        .Skip((PageNumber - 1) * PageSize)
+                        .Take(PageSize)
+                        .ToListAsync();
+
+                    // ➤ Eğer düzenleme yapılıyorsa, formu doldur
+                    if (EditId.HasValue)
+                    {
+                        var item = await _context.Classes.FindAsync(EditId.Value);
+                        if (item != null)
+                        {
+                            NewClass = item;
+                        }
+                    }
+                }
+
+
+        
+
+        public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || _storage == null)
+            if (!ModelState.IsValid)
                 return Page();
 
             if (EditId.HasValue)
             {
-                var existing = _storage.FirstOrDefault(x => x.Id == EditId.Value);
+                var existing = await _context.Classes.FindAsync(EditId.Value);
                 if (existing != null)
                 {
                     existing.ClassName = NewClass.ClassName;
                     existing.StudentCount = NewClass.StudentCount;
                     existing.Description = NewClass.Description;
+                    existing.IsActive = NewClass.IsActive;
                 }
             }
             else
             {
-                int newId = 1;
-                while (_storage.Any(x => x.Id == newId))
-                    newId++;
+                _context.Classes.Add(NewClass);
+            }
 
-                NewClass.Id = newId;
-                _storage.Add(NewClass);
+            await _context.SaveChangesAsync();
+            return RedirectToPage(new { PageNumber, ClassNameFilter });
+        }
+
+
+        public async Task<IActionResult> OnPostDeleteAsync(int id)
+        {
+            var item = await _context.Classes.FindAsync(id);
+            if (item != null)
+            {
+                item.IsActive = false;
+                await _context.SaveChangesAsync();
             }
 
             return RedirectToPage(new { PageNumber, ClassNameFilter });
         }
 
-        public IActionResult OnPostDelete(int id)
-        {
-            if (_storage == null) return RedirectToPage();
 
-            var item = _storage.FirstOrDefault(c => c.Id == id);
-            if (item != null)
-                _storage.Remove(item);
-
-            return RedirectToPage(new { PageNumber, ClassNameFilter });
-        }
-
-        private static List<ClassInformationModel> GenerateFakeData()
+        private List<Class> GenerateFakeData()
         {
             string[] baseNames = { "Math", "Science", "English", "History", "Physics", "Biology", "Art", "Music", "PE", "Chemistry" };
             string[] suffixes = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" }; 
 
 
-            var list = new List<ClassInformationModel>();
+            var list = new List<Class>();
             int idCounter = 1;
 
             foreach (var name in baseNames)
             {
                 foreach (var suffix in suffixes)
                 {
-                    list.Add(new ClassInformationModel
+                    list.Add(new Class
                     {
                         Id = idCounter,
                         ClassName = $"{name} {suffix}",
@@ -154,13 +161,10 @@ namespace Week5Lab.Pages
 
             return list;
         }
-        public IActionResult OnPostExport(string? selectedColumns, string? FilteredExport)
+        public async Task<IActionResult> OnPostExportAsync(string? selectedColumns, string? FilteredExport)
         {
-            if (_storage == null) return BadRequest("No data to export.");
-
             List<string>? selectedList = null;
 
-            
             if (!string.IsNullOrWhiteSpace(selectedColumns))
             {
                 selectedList = selectedColumns
@@ -168,33 +172,27 @@ namespace Week5Lab.Pages
                     .Select(s => s.Trim())
                     .ToList();
 
-                
                 if (selectedList.Count == 0)
                 {
                     selectedList = null;
                 }
             }
 
-            
-            var query = _storage.AsQueryable();
-            if (selectedList != null)
-            {
-                
-                if (!string.IsNullOrWhiteSpace(ClassNameFilter))
-                {
-                    query = query.Where(x => x.ClassName.Contains(ClassNameFilter, StringComparison.OrdinalIgnoreCase));
-                }
+            var query = _context.Classes.AsQueryable();
 
-                if (FilteredExport != "true")
-                {
-                    query = query
-                        .Skip((PageNumber - 1) * PageSize)
-                        .Take(PageSize);
-                }
+            if (!string.IsNullOrWhiteSpace(ClassNameFilter))
+            {
+                query = query.Where(x => x.ClassName.Contains(ClassNameFilter));
             }
 
-            var exportList = query.ToList();
+            if (FilteredExport != "true")
+            {
+                query = query
+                    .Skip((PageNumber - 1) * PageSize)
+                    .Take(PageSize);
+            }
 
+            var exportList = await query.ToListAsync();
             var json = Helpers.Utils.Instance.ExportToJson(exportList, selectedList);
 
             var timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
@@ -202,6 +200,7 @@ namespace Week5Lab.Pages
 
             return File(System.Text.Encoding.UTF8.GetBytes(json), "application/json", filename);
         }
+
         public IActionResult OnPostLogout()
             {
                 HttpContext.Session.Clear();
@@ -211,6 +210,46 @@ namespace Week5Lab.Pages
 
                 return RedirectToPage("/Login");
             }
+
+
+        private void EnsureSeeded()
+        {
+            if (!_context.Classes.Any())
+            {
+                var rnd = new Random();
+                for (int i = 1; i <= 100; i++)
+                {
+                    _context.Classes.Add(new Class
+                    {
+                        ClassName = $"Class {i}",
+                        StudentCount = rnd.Next(10, 50),
+                        Description = $"Description for class {i}",
+                        IsActive = true
+                    });
+                }
+                _context.SaveChanges();
+            }
+
+            if (!_context.Users.Any())
+            {
+                _context.Users.Add(new User
+                {
+                    Username = "admin",
+                    Password = "1234", // ⚠️ test amaçlı düz şifre
+                    IsActive = true
+                });
+
+                _context.Users.Add(new User
+                {
+                    Username = "test",
+                    Password = "test",
+                    IsActive = true
+                });
+
+                _context.SaveChanges();
+            }
+        }
+
 
 
 

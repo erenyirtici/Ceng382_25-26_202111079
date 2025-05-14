@@ -1,19 +1,26 @@
+using Week5Lab.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// ✅ Step 1: Add Session services
+// 💾 SQL Server bağlantısı
+builder.Services.AddDbContext<SchoolDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SchoolDbConnection")));
+
+// 🧠 Session ayarları
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30);  // Oturum süresi 30 dakika
-    options.Cookie.HttpOnly = true;                  // JavaScript erişemesin
-    options.Cookie.IsEssential = true;               // Zorunlu cookie
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
 });
 
-// Razor Pages
+// 🔧 Razor Pages
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-// Exception handler
+// 🧯 Error handler
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
@@ -21,15 +28,12 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-// ✅ Step 2: Use Session middleware
-app.UseSession();
+app.UseStaticFiles(); // ⚠️ Bunu ekle
 
 app.UseRouting();
+app.UseSession();     // ✅ Session middleware
 app.UseAuthorization();
 
-// Static files
-app.MapStaticAssets();
-app.MapRazorPages().WithStaticAssets();
+app.MapRazorPages();
 
 app.Run();

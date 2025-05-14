@@ -33,6 +33,10 @@
                             <textarea asp-for="NewClass.Description" class="form-control"></textarea>
                             <span asp-validation-for="NewClass.Description" class="text-danger small"></span>
                         </div>
+                        <div class="form-check mb-3">
+                            <input asp-for="NewClass.IsActive" class="form-check-input" />
+                            <label asp-for="NewClass.IsActive" class="form-check-label">Is Active</label>
+                        </div>
                         <button type="submit" class="btn @(Model.EditId.HasValue ? "btn-warning" : "btn-primary") w-100">
                             @(Model.EditId.HasValue ? "Update Class" : "Add Class")
                         </button>
@@ -83,17 +87,19 @@
                             <th data-column="ClassName" onclick="toggleColumnSelection('ClassName')">Class Name</th>
                             <th data-column="StudentCount" onclick="toggleColumnSelection('StudentCount')">Student Count</th>
                             <th data-column="Description" onclick="toggleColumnSelection('Description')">Description</th>
+                            <th>Is Active</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                            @foreach (var item in Model.DisplayedClasses)
+                            @foreach (var item in Model.ClassList)
                             {
                                 <tr>
                                     <td data-column="ClassName">@item.ClassName</td>
                                     <td data-column="StudentCount">@item.StudentCount</td>
                                     <td data-column="Description">@item.Description</td>
+                                    <td>@(item.IsActive ? "Yes" : "No")</td>
                                     <td>
                                         <div class="d-flex gap-2">
                                             <form method="get" asp-page="./Index">
